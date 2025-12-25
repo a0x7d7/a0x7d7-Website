@@ -80,10 +80,12 @@ a:hover {
 }
 
 /* Title spacing tweaks */
+/* --- Center name visually --- */
 h1 {
-  margin-top: -20px;
-  margin-bottom: 10px;
+  letter-spacing: 0.12em;
 }
+
+
 .project-title {
   font-weight: 700;
   margin-top: 36px;
@@ -153,45 +155,81 @@ h1 {
 }
 .pixel.on {
   background: #c70000;
+}/* --- Emphasize identity block --- */
+h1 {
+  font-size: 3.5rem;          /* bigger name */
+  letter-spacing: 0.18em;
+  margin-bottom: 10px;
+}
+
+.linker > span:first-child {
+  font-size: 1.1rem;        /* GitHub / YouTube / LinkedIn */
+}
+
+.linker > span:nth-child(2) {
+  font-size: 1rem;       /* quote */
+  max-width: 720px;
+  margin: 0 auto;
+  opacity: 0.85;
+}
+
+/* --- Hide pixel wall visually only --- */
+#pixelWall {
+  display: none;
 }
 </style>
 </head>
 
 <body>
 <div class="wrapper">
-  <h1>AIDAN FERNANDES</h1>
-
-  <div class="linker">
-    <span>
-      <a href="#">[GitHub]</a> --
-      <a href="#">[YouTube]</a> --
-      <a href="#">[LinkedIn]</a>
-    </span>
-
-    <span>"and when the ǤʄĴʤ was given life, she wept"</span>
-
-    <div class="project-title">回転寿司</div>
-
+  <div class="belt">
+      <div class="belt-inner">
+        <div class="belt-track">
+          <a href="#">[Belt 2 | Under Construction]</a>
+          <a href="#">[Belt 2 | Under Construction]</a>
+          <a href="#">[Belt 2 | Under Construction]</a>
+        </div>
+        <div class="belt-track">
+          <a href="#">[Belt 2 | Under Construction]</a>
+          <a href="#">[Belt 2 | Under Construction]</a>
+          <a href="#">[Belt 2 | Under Construction]</a>
+        </div>
+    </div>
+<div>--- / --- / --- / ---</div>
     <div class="belt">
       <div class="belt-inner">
         <div class="belt-track">
           <a href="/sotd">Script of The Day</a>
           <a href="#">ßʁƐȀȈÄų</a>
-          <a href="#">ËȧǱǬ¨ɇĜəǖėǆʢǹ</a>
+          <a href="#">ËȧǱǬǹ</a>
           <a href="#">ĪƇȠʵɪʇ¼ÈŲ</a>
           <a href="#">ÆƘeŋƀ</a>
         </div>
         <div class="belt-track">
           <a href="/sotd">Script of The Day</a>
           <a href="#">ßʁƐȀȈÄų</a>
-          <a href="#">ËȧǱǬ¨ɇĜəǖėǆʢǹ</a>
+          <a href="#">ËȧǱǬǹ</a>
           <a href="#">ĪƇȠʵɪʇ¼ÈŲ</a>
           <a href="#">ÆƘeŋƀ</a>
         </div>
       </div>
     </div>
+  
+  <div class="project-title">回転寿司</div>
 
-    <div class="project-title">Fidget Board</div>
+  <h1>AIDAN FERNANDES</h1>
+
+  <div class="linker">
+    <span>
+      <a href="#">[GitHub]</a> --
+      <a href="#">[LinkedIn]</a> --
+      <a href="#">[YouTube]</a> --
+      <a href="#">[Instagram]</a>
+    </span>
+
+    <span>"and when the ǤʄĴʤ was given life, she wept"</span>
+
+    <div class="project-title">むげんプチプチ</div>
 
     <div class="fidget">
       <div class="fidget-row">
