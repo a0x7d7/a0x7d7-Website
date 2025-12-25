@@ -11,37 +11,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet" />
 
 <style>
-.fidget-row button.fixed-toggle {
-  width: 24px;
-  height: 24px;
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  font-size: 12px;
-}
-
 :root {
   --bg-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%23bbb' fill-opacity='0.45'/%3E%3C/svg%3E");
   --dot-speed: 120s;
 }
 
-/* -------- Base -------- */
+/* Base */
 body {
   font-family: "Courier Prime", Courier, monospace;
   margin: 0;
-  line-height: 1.4;
+  min-height: 100vh;
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  align-items: flex-start;
   position: relative;
   overflow: hidden;
 }
 
-/* -------- Background dots -------- */
+/* Background */
 @keyframes dotsDown {
   from { background-position: 0 0; }
   to   { background-position: 0 100%; }
@@ -57,261 +45,127 @@ body::before {
   animation: dotsDown var(--dot-speed) linear infinite;
 }
 
-/* -------- Links -------- */
+/* Links */
 a {
   color: #c70000;
   text-decoration: none;
   font-weight: 600;
-  white-space: nowrap;
 }
 a:hover {
   color: #900000;
   text-decoration: underline;
 }
 
-/* -------- Layout -------- */
+/* Wrapper */
 .wrapper {
   max-width: 1000px;
-  padding: 20px;
-}
-.linker {
-  display: grid;
-  gap: 18px;
+  padding: clamp(60px, 12vh, 140px) 20px 40px;
 }
 
-/* Title spacing tweaks */
-/* --- Center name visually --- */
+/* Identity */
 h1 {
-  letter-spacing: 0.12em;
+  font-size: clamp(2.8rem, 6vw, 3.8rem);
+  letter-spacing: 0.18em;
+  margin: 0 0 14px;
 }
 
-
-.project-title {
-  font-weight: 700;
-  margin-top: 36px;
+.links {
+  font-size: 1.1rem;
+  margin-bottom: 14px;
 }
 
-/* -------- Belt -------- */
+.quote {
+  font-size: 1rem;
+  opacity: 0.85;
+  max-width: 720px;
+  margin: 0 auto 60px;
+}
+
+/* Conveyor Belt */
 .belt {
   width: 100vw;
   overflow: hidden;
   margin-left: calc(50% - 50vw);
 }
+
 .belt-inner {
   display: flex;
   width: 200%;
-  animation: beltMove var(--belt-speed, 20s) linear infinite;
+  animation: beltMove 20s linear infinite;
 }
+
 .belt-track {
   display: flex;
   width: 50%;
   justify-content: space-around;
-  flex-shrink: 0;
 }
+
 @keyframes beltMove {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 
-/* -------- Fidget -------- */
-.fidget {
-  display: grid;
-  gap: 14px;
-  margin-top: 28px;
-}
-.fidget-row {
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px 18px;
+/* ---------- Conveyor Belt Title ---------- */
+.belt-title {
+  font-weight: 700;
+  margin-top: clamp(32px, 6vh, 64px);
+  margin-bottom: clamp(18px, 3vh, 32px);
 }
 
-/* -------- Counter -------- */
-.counter {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.counter-value {
-  min-width: 40px;
+/* ---------- Extra spacing between name block and belt ---------- */
+.quote {
+  margin-bottom: clamp(48px, 10vh, 96px);
 }
 
-/* -------- Pixel Wall -------- */
-.pixel-wall {
-  display: grid;
-  grid-template-columns: repeat(64, 14px);
-  grid-template-rows: repeat(4, 14px);
-  gap: 3px;
-  user-select: none;
-}
-.pixel {
-  width: 14px;
-  height: 14px;
-  background: #fff;
-  border: 1px solid #ddd;
-  cursor: pointer;
-}
-.pixel.on {
-  background: #c70000;
-}/* --- Emphasize identity block --- */
-h1 {
-  font-size: 3.5rem;          /* bigger name */
-  letter-spacing: 0.18em;
-  margin-bottom: 10px;
+/* ---------- Mobile safety ---------- */
+@media (max-width: 600px) {
+  .wrapper {
+    padding-top: clamp(48px, 10vh, 80px);
+  }
 }
 
-.linker > span:first-child {
-  font-size: 1.1rem;        /* GitHub / YouTube / LinkedIn */
-}
-
-.linker > span:nth-child(2) {
-  font-size: 1rem;       /* quote */
-  max-width: 720px;
-  margin: 0 auto;
-  opacity: 0.85;
-}
-
-/* --- Hide pixel wall visually only --- */
-#pixelWall {
-  display: none;
-}
 </style>
 </head>
 
 <body>
 <div class="wrapper">
-  <div class="belt">
-      <div class="belt-inner">
-        <div class="belt-track">
-          <a href="#">[Belt 2 | Under Construction]</a>
-          <a href="#">[Belt 2 | Under Construction]</a>
-          <a href="#">[Belt 2 | Under Construction]</a>
-        </div>
-        <div class="belt-track">
-          <a href="#">[Belt 2 | Under Construction]</a>
-          <a href="#">[Belt 2 | Under Construction]</a>
-          <a href="#">[Belt 2 | Under Construction]</a>
-        </div>
-    </div>
-<div>--- / --- / --- / ---</div>
-    <div class="belt">
-      <div class="belt-inner">
-        <div class="belt-track">
-          <a href="/sotd">Script of The Day</a>
-          <a href="#">ßʁƐȀȈÄų</a>
-          <a href="#">ËȧǱǬǹ</a>
-          <a href="#">ĪƇȠʵɪʇ¼ÈŲ</a>
-          <a href="#">ÆƘeŋƀ</a>
-        </div>
-        <div class="belt-track">
-          <a href="/sotd">Script of The Day</a>
-          <a href="#">ßʁƐȀȈÄų</a>
-          <a href="#">ËȧǱǬǹ</a>
-          <a href="#">ĪƇȠʵɪʇ¼ÈŲ</a>
-          <a href="#">ÆƘeŋƀ</a>
-        </div>
-      </div>
-    </div>
-  
-  <div class="project-title">回転寿司</div>
 
+  <!-- Name block (TOP) -->
   <h1>AIDAN FERNANDES</h1>
 
-  <div class="linker">
-    <span>
-      <a href="#">[GitHub]</a> --
-      <a href="#">[LinkedIn]</a> --
-      <a href="#">[YouTube]</a> --
-      <a href="#">[Instagram]</a>
-    </span>
+  <div class="links">
+    <a href="#">[GitHub]</a> --
+    <a href="#">[LinkedIn]</a> --
+    <a href="#">[YouTube]</a> --
+    <a href="#">[Instagram]</a>
+  </div>
 
-    <span>"and when the ǤʄĴʤ was given life, she wept"</span>
+  <div class="quote">
+    "and when the ǤʄĴʤ was given life, she wept"
+  </div>
 
-    <div class="project-title">むげんプチプチ</div>
+<div class="belt-title">回転寿司</div>
 
-    <div class="fidget">
-      <div class="fidget-row">
-        <div class="counter">
-          <button id="minus">-</button>
-          <span class="counter-value" id="count">0</span>
-          <button id="plus">+</button>
-        </div>
+  <!-- Conveyor Belt (UNDER NAME) -->
+  <div class="belt">
+    <div class="belt-inner">
+      <div class="belt-track">
+        <a href="/sotd">Script of The Day</a>
+        <a href="/fidget">Fidget Board</a>
+        <a href="#">ßʁƐȀȈÄų</a>
+        <a href="#">ĪƇȠʵɪʇ¼ÈŲ</a>
+        <a href="#">ÆƘeŋƀ</a>
       </div>
-
-      <div class="fidget-row">
-        <button id="onceBtn">➀</button>
-        <button>button</button>
-        <input type="range">
-        <input type="checkbox">
-        <input type="radio">
-        <input type="range" id="seedSlider" min="0" max="9999" value="5000">
-        <button id="questionBtn">?</button>
+      <div class="belt-track">
+        <a href="/sotd">Script of The Day</a>
+        <a href="/fidget">Fidget Board</a>
+        <a href="#">ßʁƐȀȈÄų</a>
+        <a href="#">ĪƇȠʵɪʇ¼ÈŲ</a>
+        <a href="#">ÆƘeŋƀ</a>
       </div>
-
-      <div class="fidget-row">
-        <input type="range" id="volumeSlider">
-        <button id="musicBtn">♪</button>
-        <button class="fixed-toggle" id="heartBtn">❤︎</button>
-        <input type="range" id="speedSlider">
-        <input type="text" id="noiseInput" placeholder="noise">
-        <button id="speakNoise">*</button>
-        <input type="checkbox">
-      </div>
-
-      <div class="fidget-row">
-        <label><input type="checkbox"> A</label>
-        <label><input type="checkbox"> B</label>
-        <label><input type="checkbox"> C</label>
-        <label><input type="checkbox"> D</label>
-        <label><input type="checkbox"> E</label>
-        <label><input type="radio" name="r1"> 1</label>
-        <label><input type="radio" name="r1"> 2</label>
-        <label><input type="radio" name="r1"> 3</label>
-        <button>!</button>
-      </div>
-
-      <div class="fidget-row">
-        <input type="text" placeholder="text box">
-        <input type="text" placeholder="another one">
-        <select><option>happy</option><option>salty</option><option>spicy</option><option>noisy</option><option>cool</option></select>
-        <select><option>human</option><option>pickle</option><option>rock</option><option>crt</option><option>beaver</option></select>
-        <button>ok</button>
-        <button class="fixed-toggle" button id="beltToggle">❚❚</button>
-        <input type="range" id="beltSpeed">
-      </div>
-
-      <div class="fidget-row">
-        <button disabled>disabled</button>
-        <input type="range" disabled>
-        <input type="checkbox" disabled>
-        <input type="text" disabled placeholder="⊹₊ ˚‧︵‿₊୨ ᰔ ୧₊‿︵‧ ˚ ₊⊹">
-        <button id="resetGrid">reset</button>
-        <button>...</button>
-      </div>
-
-      <div class="fidget-row">
-        <div class="pixel-wall" id="pixelWall"></div>
-      </div>
-
     </div>
   </div>
-</div>
 
-<!-- Overlay -->
-<div id="overlay" style="
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.35);
-  z-index:1000;
-  align-items:center;
-  justify-content:center;">
-  <img src="/assets/once.png" style="max-width:80%; max-height:80%;">
 </div>
-
-<!-- Single entry point -->
-<script type="module" src="/js/main.js"></script>
 </body>
 </html>
