@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>🎉🎉🎉</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --bg-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%23bbb' fill-opacity='0.45'/%3E%3C/svg%3E");
+  --dot-speed: 120s;
+}
+
+/* -------- Base -------- */
+body {
+  font-family: "Courier Prime", Courier, monospace;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* -------- Background -------- */
+@keyframes dotsDown {
+  from { background-position: 0 0; }
+  to   { background-position: 0 100%; }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #fff var(--bg-pattern);
+  animation: dotsDown var(--dot-speed) linear infinite;
+}
+
+.card {
+  background: transparent;
+  padding: 36px 32px;
+  max-width: 520px;
+  width: 90%;
+}
+
+/* -------- Password -------- */
+input[type="password"] {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 8px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+button {
+  font-family: inherit;
+  margin-top: 16px;
+  padding: 6px 16px;
+  cursor: pointer;
+}
+
+/* -------- Hidden content -------- */
+.hidden {
+  display: none;
+}
+
+h1 {
+  letter-spacing: 0.15em;
+  margin-bottom: 18px;
+}
+
+.codes {
+  margin-top: 24px;
+}
+
+.code {
+  margin: 8px 0;
+  color: #c70000;
+  font-weight: 700;
+}
+
+/* -------- Confetti -------- */
+.confetti {
+  position: fixed;
+  width: 6px;
+  height: 10px;
+  background: #c70000;
+  top: -10px;
+  animation: fall linear forwards;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- PASSWORD -->
+  <div id="lock">
+    <div>enter password</div>
+    <input type="password" id="password" autocomplete="off" />
+    <button id="unlock">unlock</button>
+  </div>
+
+  <!-- CONTENT -->
+  <div id="content" class="hidden">
+    <h1>HAPPY BIRTHDAY JANNELLI</h1>
+
+    <p>
+      i hope today is full of good food, good people,
+      and at least one moment that makes you stop and smile.
+      you deserve that and more.
+    </p>
+
+    <div class="codes">
+      <div class="code" id="c1"></div>
+      <div class="code" id="c2"></div>
+      <div class="code" id="c3"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const CORRECT = "call juan a northen ai";
+
+const unlockBtn = document.getElementById("unlock");
+const input = document.getElementById("password");
+const lock = document.getElementById("lock");
+const content = document.getElementById("content");
+
+// These are injected by Vercel (see instructions below)
+const G1 = window.GIFTCARD_1;
+const G2 = window.GIFTCARD_2;
+const G3 = window.GIFTCARD_3;
+
+unlockBtn.onclick = () => {
+  if (input.value === CORRECT) {
+    lock.style.display = "none";
+    content.classList.remove("hidden");
+
+    document.getElementById("c1").textContent = G1;
+    document.getElementById("c2").textContent = G2;
+    document.getElementById("c3").textContent = G3;
+
+    confetti();
+  } else {
+    input.value = "";
+  }
+};
+
+/* -------- Confetti -------- */
+function confetti() {
+  for (let i = 0; i < 120; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = Math.random() > 0.5 ? "#c70000" : "#bbb";
+    c.style.animationDuration = 2 + Math.random() * 3 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 5000);
+  }
+}
+</script>
+
+<!-- ENV VAR INJECTION -->
+<script>
+/*
+Vercel replaces these at build time.
+You MUST expose them as public variables.
+*/
+window.GIFTCARD_1 = "__GIFTCARD_1__";
+window.GIFTCARD_2 = "__GIFTCARD_2__";
+window.GIFTCARD_3 = "__GIFTCARD_3__";
+</script>
+
+</body>
+</html>
