@@ -1,7 +1,7 @@
-export default function handler(req, res) {
-  res.status(200).json({
-    g1: process.env.VITE_GIFTCARD_1,
-    g2: process.env.VITE_GIFTCARD_2,
-    g3: process.env.VITE_GIFTCARD_3,
-  });
+async function loadGiftCards() {
+  const res = await fetch("/api/giftcards");
+  const data = await res.json();
+  G1 = data.g1;
+  G2 = data.g2;
+  G3 = data.g3;
 }
