@@ -66,7 +66,7 @@ button {
   cursor: pointer;
 }
 
-/* -------- Hidden content -------- */
+/* -------- Hidden -------- */
 .hidden {
   display: none;
 }
@@ -144,10 +144,18 @@ const input = document.getElementById("password");
 const lock = document.getElementById("lock");
 const content = document.getElementById("content");
 
-// These are injected by Vercel (see instructions below)
-const G1 = window.GIFTCARD_1;
-const G2 = window.GIFTCARD_2;
-const G3 = window.GIFTCARD_3;
+let G1, G2, G3;
+
+// Fetch gift cards from Vercel serverless API
+async function loadGiftCards() {
+  const res = await fetch("/api/giftcards");
+  const data = await res.json();
+  G1 = data.g1;
+  G2 = data.g2;
+  G3 = data.g3;
+}
+
+loadGiftCards();
 
 unlockBtn.onclick = () => {
   if (input.value === CORRECT) {
@@ -176,18 +184,6 @@ function confetti() {
     setTimeout(() => c.remove(), 5000);
   }
 }
-</script>
-
-<!-- ENV VAR INJECTION -->
-<script>
-console.log("Gift 1:", import.meta.env.VITE_GIFTCARD_1);
-/*
-Vercel replaces these at build time.
-You MUST expose them as public variables.
-*/
-window.GIFTCARD_1 = "__GIFTCARD_1__";
-window.GIFTCARD_2 = "__GIFTCARD_2__";
-window.GIFTCARD_3 = "__GIFTCARD_3__";
 </script>
 
 </body>
