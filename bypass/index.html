@@ -1,160 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Web Gateway</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="/assets/favicon.ico">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gateway - a0x7d7</title>
 
-  <style>
-    :root {
-      --bg: #0f0f0f;
-      --fg: #eaeaea;
-      --accent: #4f46e5;
-      --border: #2a2a2a;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet" />
 
-    * {
-      box-sizing: border-box;
-    }
+<style>
+:root {
+  --bg-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%23bbb' fill-opacity='0.45'/%3E%3C/svg%3E");
+  --dot-speed: 120s;
+  --accent: #c70000;
+}
 
-    body {
-      margin: 0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-        "Liberation Mono", "Courier New", monospace;
-      background: var(--bg);
-      color: var(--fg);
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+/* -------- Base -------- */
+body {
+  font-family: "Courier Prime", Courier, monospace;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  line-height: 1.4;
+  position: relative;
+}
 
-    .center {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+@keyframes dotsDown {
+  from { background-position: 0 0; }
+  to   { background-position: 0 100%; }
+}
 
-    .search-box {
-      width: min(600px, 90%);
-      display: flex;
-      gap: 10px;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: #fff;
+  background-image: var(--bg-pattern);
+  animation: dotsDown var(--dot-speed) linear infinite;
+}
 
-    input {
-      flex: 1;
-      padding: 14px 16px;
-      font-size: 16px;
-      background: #111;
-      color: var(--fg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      outline: none;
-    }
+/* -------- Home Button -------- */
+.home {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 0.85rem;
+}
 
-    input:focus {
-      border-color: var(--accent);
-    }
+.home a {
+  color: var(--accent);
+  text-decoration: none;
+  opacity: 0.75;
+}
 
-    button {
-      padding: 14px 18px;
-      font-size: 16px;
-      background: var(--accent);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+.home a:hover {
+  text-decoration: underline;
+  opacity: 1;
+}
 
-    button:hover {
-      opacity: 0.9;
-    }
+/* -------- Content -------- */
+.wrapper {
+  max-width: 900px;
+  padding: 120px 20px 100px;
+}
 
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: none;
-    }
+h1 {
+  font-size: 2.6rem;
+  margin-bottom: 60px;
+  letter-spacing: 0.05em;
+}
 
-    .top-bar {
-      padding: 10px;
-      border-bottom: 1px solid var(--border);
-      display: none;
-      gap: 10px;
-      align-items: center;
-    }
+/* -------- Gateway UI -------- */
+.gateway {
+  margin-top: 40px;
+}
 
-    .top-bar span {
-      opacity: 0.7;
-      font-size: 14px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+.gateway p {
+  opacity: 0.75;
+  margin-bottom: 24px;
+}
 
-    .back {
-      cursor: pointer;
-      color: var(--accent);
-      font-size: 14px;
-    }
-  </style>
+.gateway form {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.gateway input {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 10px 12px;
+  width: min(420px, 90vw);
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0,0.25);
+  background: transparent;
+  outline: none;
+}
+
+.gateway input:focus {
+  border-color: var(--accent);
+}
+
+.gateway button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  background: none;
+  border: 1px solid rgba(0,0,0,0.3);
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.gateway button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  opacity: 1;
+}
+
+/* -------- Scrollbar -------- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.15);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(199,0,0,0.5);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.2) transparent;
+}
+</style>
 </head>
 
 <body>
-  <!-- Search UI -->
-  <div class="center" id="home">
-    <form class="search-box" onsubmit="openSite(event)">
+
+<!-- Home button -->
+<div class="home">
+  <a href="/">Home</a>
+</div>
+
+<!-- Main content -->
+<div class="wrapper">
+  <h1>WEB GATEWAY</h1>
+
+  <div class="gateway">
+    <p>
+      Enter a URL to access it through the gateway.
+    </p>
+
+    <form onsubmit="openSite(event)">
       <input
         id="urlInput"
         type="text"
         placeholder="https://example.com"
         autocomplete="off"
       />
-      <button type="submit">Go</button>
+      <button type="submit">Open</button>
     </form>
   </div>
+</div>
 
-  <!-- Top bar when browsing -->
-  <div class="top-bar" id="topBar">
-    <span id="currentUrl"></span>
-    <span class="back" onclick="goHome()">⟵ back</span>
-  </div>
+<script>
+function normalizeUrl(input) {
+  if (!input.startsWith("http://") && !input.startsWith("https://")) {
+    return "https://" + input;
+  }
+  return input;
+}
 
-  <!-- Proxied content -->
-  <iframe id="viewer"></iframe>
+function openSite(e) {
+  e.preventDefault();
+  const input = document.getElementById("urlInput").value.trim();
+  if (!input) return;
 
-  <script>
-    function normalizeUrl(input) {
-      if (!input.startsWith("http://") && !input.startsWith("https://")) {
-        return "https://" + input;
-      }
-      return input;
-    }
+  const url = normalizeUrl(input);
+  const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
+  window.location.href = proxyUrl;
+}
+</script>
 
-    function openSite(e) {
-      e.preventDefault();
-
-      const input = document.getElementById("urlInput").value.trim();
-      if (!input) return;
-
-      const url = normalizeUrl(input);
-      const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
-
-      window.location.href = proxyUrl;
-      document.getElementById("viewer").style.display = "block";
-      document.getElementById("home").style.display = "none";
-      document.getElementById("topBar").style.display = "flex";
-      document.getElementById("currentUrl").textContent = url;
-    }
-
-    function goHome() {
-      document.getElementById("viewer").src = "";
-      document.getElementById("viewer").style.display = "none";
-      document.getElementById("home").style.display = "flex";
-      document.getElementById("topBar").style.display = "none";
-      document.getElementById("urlInput").value = "";
-    }
-  </script>
 </body>
 </html>
