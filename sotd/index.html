@@ -4,23 +4,17 @@
 <link rel="icon" href="/assets/favicon.ico">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SoTD - a0x7d7</title>
+<title>Gateway - a0x7d7</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet" />
 
 <style>
-
-/* Archive dates */
-.archive li span {
-  color: #c70000;
-  opacity: 0.75;
-}
-
 :root {
   --bg-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='1.5' fill='%23bbb' fill-opacity='0.45'/%3E%3C/svg%3E");
   --dot-speed: 120s;
+  --accent: #c70000;
 }
 
 /* -------- Base -------- */
@@ -60,7 +54,7 @@ body::before {
 }
 
 .home a {
-  color: #c70000;
+  color: var(--accent);
   text-decoration: none;
   opacity: 0.75;
 }
@@ -73,80 +67,80 @@ body::before {
 /* -------- Content -------- */
 .wrapper {
   max-width: 900px;
-  padding: 80px 20px 100px;
+  padding: 120px 20px 100px;
 }
 
 h1 {
   font-size: 2.6rem;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   letter-spacing: 0.05em;
 }
 
-.current {
-  font-size: 1.6rem;
-  margin-bottom: 60px;
+/* -------- Gateway UI -------- */
+.gateway {
+  margin-top: 40px;
 }
 
-.current span {
-  display: block;
-  margin-top: 14px;
-  font-size: 1.9rem;
-  font-weight: 700;
+.gateway p {
+  opacity: 0.75;
+  margin-bottom: 24px;
 }
 
-.archive {
-  text-align: left;
-  max-width: 600px;
-  margin: 0 auto;
+.gateway form {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.archive h2 {
-  font-size: 1.2rem;
-  margin-bottom: 16px;
-  font-weight: 700;
+.gateway input {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 10px 12px;
+  width: min(420px, 90vw);
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0,0.25);
+  background: transparent;
+  outline: none;
 }
 
-.archive ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.gateway input:focus {
+  border-color: var(--accent);
 }
 
-.archive li {
-  padding: 6px 0;
-  opacity: 0.85;
+.gateway button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  background: none;
+  border: 1px solid rgba(0,0,0,0.3);
+  cursor: pointer;
+  opacity: 0.75;
 }
 
-.archive li span {
-  opacity: 0.6;
+.gateway button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  opacity: 1;
 }
 
-/* -------- Scrollbar (on-theme) -------- */
-
-/* Chrome / Edge / Safari */
+/* -------- Scrollbar -------- */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.15);
-  border-radius: 0;
+  background-color: rgba(0,0,0,0.15);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(199, 0, 0, 0.5);
+  background-color: rgba(199,0,0,0.5);
 }
 
-/* Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(0,0,0,0.2) transparent;
 }
-
 </style>
 </head>
 
@@ -159,26 +153,43 @@ h1 {
 
 <!-- Main content -->
 <div class="wrapper">
-  <h1>SCRIPT OF THE DAY</h1>
+  <h1>WEB GATEWAY</h1>
 
-  <div class="current">
-    Today's problem:
-    <span>
-      3D cellular automata.
-    </span>
-  </div>
+  <div class="gateway">
+    <p>
+      Enter a URL to access it through the gateway.
+    </p>
 
-  <div class="archive">
-    <h2>SoTD Log</h2>
-    <ul>
-      <li><span>2025-12-25</span> - Script that outputs random questions.</li>
-      <li><span>2025-12-26</span> - 2D fluid smiulator.</li>
-      <li><span>2025-12-27</span> - Probability based pathfinding algorithm.</li>
-      <li><span>2025-12-28</span> - Text based RPG.</li>
-      <li><span>2025-12-29</span> - 3D cellular automata.</li>
-    </ul>
+    <form onsubmit="openSite(event)">
+      <input
+        id="urlInput"
+        type="text"
+        placeholder="https://example.com"
+        autocomplete="off"
+      />
+      <button type="submit">Open</button>
+    </form>
   </div>
 </div>
+
+<script>
+function normalizeUrl(input) {
+  if (!input.startsWith("http://") && !input.startsWith("https://")) {
+    return "https://" + input;
+  }
+  return input;
+}
+
+function openSite(e) {
+  e.preventDefault();
+  const input = document.getElementById("urlInput").value.trim();
+  if (!input) return;
+
+  const url = normalizeUrl(input);
+  const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
+  window.location.href = proxyUrl;
+}
+</script>
 
 </body>
 </html>
